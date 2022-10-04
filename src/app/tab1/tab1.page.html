@@ -4,7 +4,7 @@
       Por Hacer
       
     </ion-title >
-    <img style="width: 50px; padding: 2px;" slot="start" src="../../assets/img/to-do-list.png">
+    <img style="width: 70px; padding: 3px;" slot="start" src="../../assets/img/to-do-list.png">
   </ion-toolbar>
 </ion-header>
 
@@ -17,7 +17,10 @@
     <ion-item-sliding *ngFor="let listaItem of listaService.listas">
       <ion-item>
         <ion-label>{{ listaItem.titulo }}</ion-label>
+        <img style="width: 15px; padding: 1px;" slot="start" src="../../assets/img/points.png">
+        <img style="width: 15px; padding: 1px;" slot="end" src="../../assets/img/right.png">
       </ion-item>
+      
 
 
       <ion-item-options side="start">
