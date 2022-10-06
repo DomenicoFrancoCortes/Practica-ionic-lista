@@ -55,4 +55,10 @@ export class ListaService {
 
     this.guardarStorage();
   }
+
+  obtenerLista(idLista: string | number) {
+    const id = Number(idLista); //Parseamos el dato a Number, por si viene de tipo string, de esta manera siempre trabajaremos con un Number
+    let lista = this.listas.find((itemLista)=> itemLista.id == id);
+    return lista;
+   }
 }
