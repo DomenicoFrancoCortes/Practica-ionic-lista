@@ -18,10 +18,10 @@ export class ListasComponent implements OnInit {
     public toastController: ToastController,
     public listaService: ListaService,
     private roter: Router) { }
-  
+
   ngOnInit() { }
 
- 
+
 
   validarInput(input: any): boolean {
     if (input && input.titulo) {
@@ -34,7 +34,7 @@ export class ListasComponent implements OnInit {
   async presentToast(mensage: string) {
     let toast = await this.toastController.create({
       message: mensage,
-      duration: 3000
+      duration: 2000
     });
     toast.present();
   }
@@ -119,9 +119,9 @@ export class ListasComponent implements OnInit {
   listaSeleccionada(listaItem: Lista) {
     const URL = '/agregar/' + listaItem.id
     this.roter.navigateByUrl(URL);
-
+    this.presentToast('¡Lista Seleccionada¡');
   }
 
-  
+
 
 }

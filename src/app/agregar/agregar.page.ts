@@ -38,13 +38,14 @@ export class AgregarPage implements OnInit {
     this.lista.item.push(actividad);
     this.listaService.guardarStorage();
     this.nombreItem = '';
+    this.presentToast('Actividad Agregada');
 
   }
 
   editar(actividad: Actividad) {
     this.EditarActividad(actividad);
   }
-  
+
   eliminar(actividad: Actividad) {
     this.lista.item = this.lista.item.filter((item) => item !== actividad);
     this.listaService.guardarStorage();
@@ -56,12 +57,26 @@ export class AgregarPage implements OnInit {
     if (pendientes == 0) {
       this.lista.completada = true;
       this.lista.terminadaEn = new Date();
+      
+
     } else {
       this.lista.completada = false;
       this.lista.terminadaEn = null;
+      
     }
+
     this.listaService.guardarStorage();
+    
+
   }
+  
+
+    
+  
+
+
+
+
   async EditarActividad(actividad: Actividad) {
     let alerta = await this.alertController.create({
       header: "Editar Actividad",
@@ -105,7 +120,7 @@ export class AgregarPage implements OnInit {
   async presentToast(mensage: string) {
     let toast = await this.toastController.create({
       message: mensage,
-      duration: 3000
+      duration: 2000
     });
     toast.present();
   }
