@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ListasComponent } from './listas/listas.component';
+import { PipeModule } from '../pipes/pipe.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ListasComponent } from './listas/listas.component';
   
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    PipeModule
   ],
   
   exports: [

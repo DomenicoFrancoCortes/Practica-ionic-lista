@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ListaService } from 'src/app/Servicios/lista.service';
 import { Lista } from 'src/app/models/lista.model';
@@ -12,45 +12,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./listas.component.scss'],
 })
 export class ListasComponent implements OnInit {
+  @Input() tipo: string;
 
-  constructor( public alertController: AlertController,
-              public toastController: ToastController,
-              public listaService: ListaService,) { }
-              private roter: Router
-  ngOnInit() {}
+  constructor(public alertController: AlertController,
+    public toastController: ToastController,
+    public listaService: ListaService,
+    private roter: Router) { }
+  
+  ngOnInit() { }
 
-  async AgregarLista() {
-    let alerta = await this.alertController.create({
-      header: "Agregar lista",
-      inputs: [
-        {
-          type: "text",
-          name: "titulo",
-          placeholder: "Ingresar nombre de la lista"
-        }
-      ],
-      buttons: [
-        {
-          text: "Cancelar",
-          role: "cancel"
-        },
-        {
-          text: "Crear",
-          handler: (data: any) => {
-            let esValido: boolean = this.validarInput(data);
-            if (esValido) {
-              let creadaOk = this.listaService.crearLista(data.titulo);
-              if (creadaOk) { //Se verifica si la variable tiene un valor, es decir, que fue creada
-                this.presentToast('Lista creada correctamente!');
-              }
-            }
-          }
-        }
-      ]
-    })
-    await alerta.present();
-    console.log('Click en el boton!');
-  }
+ 
 
   validarInput(input: any): boolean {
     if (input && input.titulo) {
@@ -106,7 +77,7 @@ export class ListasComponent implements OnInit {
 
   editarLista(listaItem: Lista) {
     this.EditarLista(listaItem);
-   
+
   }
 
   eliminarLista(listaItem: Lista) {
@@ -135,8 +106,8 @@ export class ListasComponent implements OnInit {
           role: 'confirm',
           handler: () => {
             this.listaService.eliminarLista(listaItem);
-              this.presentToast('¡Lista elimidada con exito!');
-           
+            this.presentToast('¡Lista elimidada con exito!');
+
           },
         },
       ],
@@ -145,11 +116,12 @@ export class ListasComponent implements OnInit {
     await alert.present();
   }
 
-  listaSeleccionada(listaItem: Lista){
+  listaSeleccionada(listaItem: Lista) {
     const URL = '/agregar/' + listaItem.id
     this.roter.navigateByUrl(URL);
-    
+
   }
 
+  
 
 }

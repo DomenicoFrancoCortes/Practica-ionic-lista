@@ -22,8 +22,53 @@ export class Tab1Page {
 * @return {boolean}
 */
 
-  
+async AgregarLista() {
+  let alerta = await this.alertController.create({
+    header: "Agregar lista",
+    inputs: [
+      {
+        type: "text",
+        name: "titulo",
+        placeholder: "Ingresar nombre de la lista"
+      }
+    ],
+    buttons: [
+      {
+        text: "Cancelar",
+        role: "cancel"
+      },
+      {
+        text: "Crear",
+        handler: (data: any) => {
+          let esValido: boolean = this.validarInput(data);
+          if (esValido) {
+            let creadaOk = this.listaService.crearLista(data.titulo);
+            if (creadaOk) { //Se verifica si la variable tiene un valor, es decir, que fue creada
+              this.presentToast('Lista creada correctamente!');
+            }
+          }
+        }
+      }
+    ]
+  })
+  await alerta.present();
+  console.log('Click en el boton!');
+}
+validarInput(input: any): boolean {
+  if (input && input.titulo) {
+    return true;
+  }
+  this.presentToast('Debe ingresar un valor');
+  return false;
+}
 
+async presentToast(mensage: string) {
+  let toast = await this.toastController.create({
+    message: mensage,
+    duration: 3000
+  });
+  toast.present();
+}
  
 
 
