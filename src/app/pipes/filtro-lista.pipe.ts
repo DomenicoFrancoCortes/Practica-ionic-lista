@@ -21,6 +21,7 @@ export class FiltroListaPipe implements PipeTransform {
         break;
       case 'terminado':
         lista = listas.filter((itemLista) => itemLista.completada == true);
+        lista= listas.filter((itemLista) => itemLista.terminadaEn);
         break;
     }
     return lista;

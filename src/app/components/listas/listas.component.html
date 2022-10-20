@@ -5,6 +5,7 @@
   <ion-item-sliding *ngFor="let listaItem of listaService.listas | filtroLista : tipo">
     <ion-item (click)="listaSeleccionada(listaItem)">
       <ion-label>{{ listaItem.titulo }}</ion-label>
+      <ion-label>  {{ listaItem.terminadaEn}}</ion-label>
       <img style="width: 15px; padding: 1px;" slot="start" src="../../assets/img/points.png">
       <img style="width: 15px; padding: 1px;" slot="end" src="../../assets/img/right.png">
     </ion-item>
